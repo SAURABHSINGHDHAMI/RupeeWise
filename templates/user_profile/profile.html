@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<h1><strong>RupeeWise</strong></h1>
+<h2><strong>Welcome {{ request.user.username }}!</strong></h2>
+
+<form action = "{% url 'logout' %}" method = "POST">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+{% comment %} ---------------------------------------- {% endcomment %}
+
+<style>
+    h1 {
+        text-align: center;
+    }
+    .profile-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid #000;
+        padding: 20px;
+        margin: 20px auto;
+        width: 220px;
+    }
+    .profile-image {
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .total-amounts-table {
+        margin: 20px auto;
+        width: 40%;
+        border-collapse: collapse;
+    }
+    .total-amounts-table th,
+    .total-amounts-table td {
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: center;
+    }
+    .total-amounts-table th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+{% comment %} --------------------profile-------------------- {% endcomment %}
+
+<div class="profile-container">
+    <img src="{{ request.user.profile.image.url }}" alt="Profile Image" class="profile-image"></th>
+    <div><strong>{{ user.username }}</strong></div>
+</div>
+
+<table class="total-amounts-table">
+    <tr>
+        <td><strong>Total Bill Amount - {{ total_bill_amount}}</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Total Cloth Amount - {{ total_cloth_amount}}</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Total Food Amount - {{ total_food_amount}}</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Total Travel Amount - {{ total_travel_amount}}</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Total Subscription Amount - {{ total_subscription_amount}}</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Total Miscellaneous Amount - {{ total_miscellaneous_amount}}</strong></td>
+    </tr>
+</table>
+
+{% comment %} ---------------------------------------- {% endcomment %}
+
+{% else %}
+
+<h2>You are not logged in.</h2>
+<a href = "{% url 'login' %}">Login</a> | <a href = "{% url 'register' %}">Register</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<h1><strong>RupeeWise</strong></h1>
+<h2><strong>Welcome {{ request.user.username }}</strong></h2>
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+<h1><strong>{{ current_date|date:"l, F j, Y" }}</strong></h1>
+
+{% comment %} ---------------------------------------- {% endcomment %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .btn-success {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #f44336;
+        color: white;
+    }
+
+</style>
+
+{% comment %} --------------------bill - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Bill</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_bill_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_bill">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for bill in user_bill %}
+    <tr>
+        <td>{{ bill.name }}</td>
+        <td>{{ bill.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_bill" value = "{{ bill.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} --------------------cloth - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Cloth</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_cloth_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_cloth">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for cloth in user_cloth %}
+    <tr>
+        <td>{{ cloth.name }}</td>
+        <td>{{ cloth.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_cloth" value = "{{ cloth.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} --------------------food - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Food</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_food_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_food">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for food in user_food %}
+    <tr>
+        <td>{{ food.name }}</td>
+        <td>{{ food.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_food" value = "{{ food.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} --------------------travel - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Travel</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_travel_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_travel">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for travel in user_travel %}
+    <tr>
+        <td>{{ travel.name }}</td>
+        <td>{{ travel.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_travel" value = "{{ travel.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} --------------------subscription - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Subscription</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_subscription_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_subscription">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for subscription in user_subscription %}
+    <tr>
+        <td>{{ subscription.name }}</td>
+        <td>{{ subscription.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_subscription" value = "{{ subscription.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} --------------------miscellaneous - save | delete-------------------- {% endcomment %}
+
+<table>
+    <tr>
+        <th><strong>Miscellaneous</strong></th>
+        <th><strong>Amount</strong></th>
+        <th><strong>Action</strong></th>
+    </tr>
+    <tr>
+        <form method = "POST" action = {% url "dashboard" %}>
+            {% csrf_token %}
+            {% for field in user_miscellaneous_form%}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                <button class = "btn btn-success" name = "save_miscellaneous">Save</button>
+            </td>
+        </form>
+    </tr>
+    {% for miscellaneous in user_miscellaneous %}
+    <tr>
+        <td>{{ miscellaneous.name }}</td>
+        <td>{{ miscellaneous.amount }}</td>
+        <td>
+            <form method="POST" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <button formnovalidate class = "btn btn-danger" name = "delete_miscellaneous" value = "{{ miscellaneous.id }}">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} ---------------------------------------- {% endcomment %}
+
+{% else %}
+
+<h2>You are not logged in.</h2>
+<a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a>
+
+{% endif %}
+
+{% endblock %}

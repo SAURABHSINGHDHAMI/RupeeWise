@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1><strong>RupeeWise</strong></h1>
+<h2>User Login Page</strong></h2>
+<div>
+    <form method = "POST">
+        {% csrf_token %}
+        {{ login_form|crispy }}
+        <button tupe = "submit">Sign In</button>
+    </form>
+    <div class>
+        Need an Account? <a href = {% url "register" %}>Sign Up</a>
+    </div>
+</div>
+{% endblock %}

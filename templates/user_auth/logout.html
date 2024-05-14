@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1><strong>RupeeWise</strong></h1>
+<h2>User Logout Page</strong></h2>
+<div>
+  <p>You have been logged out.</p>
+  <div class="container">
+    <a href="{% url 'login' %}">Sign In</a>
+  </div>
+  <div class="container">
+    Need an Account? <a href="{% url 'register' %}">Sign Up</a>
+  </div>
+</div>
+{% endblock %}
+
